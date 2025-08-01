@@ -1,0 +1,785 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Impacto Eventos - Transformando Momentos em Experiências</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <style>
+    body {
+      background-color: #000000;
+      color: #f0f0f0;
+      font-family: 'Inter', sans-serif;
+      overflow-x: hidden;
+    }
+    .hero-bg {
+      background: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.9)), url('images/16C7wz8GOOqL.jpg');
+      background-size: cover;
+      background-position: center;
+      position: relative;
+    }
+    #particles-js {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      z-index: 0;
+    }
+    .hero-content {
+      position: relative;
+      z-index: 1;
+    }
+    .service-card {
+      background: rgba(20, 20, 20, 0.8);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      transition: all 0.3s ease;
+    }
+    .service-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 10px 30px rgba(236, 72, 153, 0.2);
+      border-color: rgba(236, 72, 153, 0.3);
+    }
+    .gallery-item {
+      overflow: hidden;
+      position: relative;
+    }
+    .gallery-item img {
+      transition: transform 0.5s ease;
+    }
+    .gallery-item:hover img {
+      transform: scale(1.1);
+    }
+    .gallery-item::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(to bottom, transparent 70%, rgba(0,0,0,0.8));
+    }
+    .event-card {
+      position: relative;
+      overflow: hidden;
+      transition: all 0.3s ease;
+    }
+    .event-card:hover {
+      transform: translateY(-5px);
+    }
+    .event-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, rgba(236, 72, 153, 0.15) 0%, rgba(0,0,0,0.8) 100%);
+      z-index: 1;
+    }
+    .event-content {
+      position: relative;
+      z-index: 2;
+    }
+    .glow-button {
+      position: relative;
+      overflow: hidden;
+      transition: all 0.3s ease;
+    }
+    .glow-button::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+      transition: left 0.5s;
+    }
+    .glow-button:hover::before {
+      left: 100%;
+    }
+    .nav-link {
+      position: relative;
+    }
+    .nav-link:after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      bottom: -5px;
+      left: 0;
+      background-color: #ec4899;
+      transition: width 0.3s ease;
+    }
+    .nav-link:hover:after {
+      width: 100%;
+    }
+    .floating {
+      animation: floating 3s ease-in-out infinite;
+    }
+    @keyframes floating {
+      0% { transform: translateY(0px); }
+      50% { transform: translateY(-10px); }
+      100% { transform: translateY(0px); }
+    }
+    .gradient-text {
+      background: linear-gradient(to right, #ec4899, #a855f7);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .typing-cursor::after {
+      content: '|';
+      animation: blink 1s infinite;
+    }
+    @keyframes blink {
+      0%, 20%, 50%, 80%, 100% { opacity: 1; }
+      40%, 60% { opacity: 0; }
+    }
+    .tooltip {
+      position: relative;
+    }
+    .subtle-neon-text {
+      text-shadow: 0 0 3px rgba(236, 72, 153, 0.5);
+    }
+    .subtle-neon-border {
+      box-shadow: 0 0 5px rgba(236, 72, 153, 0.3);
+    }
+    .subtle-pink {
+      color: #ec4899;
+    }
+    .subtle-purple {
+      color: #a855f7;
+    }
+    .bg-neon-gradient {
+      background: linear-gradient(135deg, #ec4899, #a855f7);
+    }
+    .form-input {
+      background-color: #1a1a1a;
+      border: 1px solid #333;
+      transition: all 0.3s ease;
+    }
+    .form-input:focus {
+      border-color: #ec4899;
+      box-shadow: 0 0 0 2px rgba(236, 72, 153, 0.2);
+    }
+    .contact-card {
+      background: linear-gradient(135deg, #1a1a1a, #0f0f0f);
+      border: 1px solid #222;
+    }
+  </style>
+</head>
+<body class="font-sans">
+  <!-- Navegação -->
+  <nav class="fixed w-full bg-black bg-opacity-95 backdrop-filter backdrop-blur-sm z-50 py-4">
+    <div class="max-w-6xl mx-auto px-6 flex justify-between items-center">
+      <div class="flex items-center">
+        <i class="fas fa-bolt subtle-pink text-2xl mr-2"></i>
+        <span class="text-xl font-bold gradient-text">Impacto Eventos</span>
+      </div>
+      <div class="hidden md:flex space-x-8">
+        <a href="#home" class="nav-link hover:text-pink-500 transition">Início</a>
+        <a href="#servicos" class="nav-link hover:text-pink-500 transition">Serviços</a>
+        <a href="#eventos" class="nav-link hover:text-pink-500 transition">Eventos</a>
+        <a href="#galeria" class="nav-link hover:text-pink-500 transition">Galeria</a>
+        <a href="#contato" class="nav-link hover:text-pink-500 transition">Contato</a>
+      </div>
+      <div class="md:hidden">
+        <button id="mobile-menu-button" class="subtle-pink focus:outline-none">
+          <i class="fas fa-bars text-xl"></i>
+        </button>
+      </div>
+    </div>
+    <!-- Menu Mobile -->
+    <div id="mobile-menu" class="hidden md:hidden bg-black bg-opacity-98 py-4 px-6">
+      <div class="flex flex-col space-y-3">
+        <a href="#home" class="hover:text-pink-500 transition">Início</a>
+        <a href="#servicos" class="hover:text-pink-500 transition">Serviços</a>
+        <a href="#eventos" class="hover:text-pink-500 transition">Eventos</a>
+        <a href="#galeria" class="hover:text-pink-500 transition">Galeria</a>
+        <a href="#contato" class="hover:text-pink-500 transition">Contato</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section id="home" class="h-screen flex flex-col justify-center items-center text-center px-6 hero-bg">
+    <div id="particles-js"></div>
+    <div class="hero-content">
+      <h1 class="text-4xl md:text-6xl font-bold text-white drop-shadow-lg mb-4 typing-cursor subtle-neon-text" id="typed-text"></h1>
+      <p class="text-xl mt-2 text-gray-200 max-w-2xl mx-auto" data-aos="fade-up" data-aos-delay="300">Som, luz, fumaça e telão de LED para transformar qualquer evento em uma experiência inesquecível.</p>
+      <div class="mt-8 flex flex-col sm:flex-row gap-4" data-aos="fade-up" data-aos-delay="500">
+        <a href="#contato" class="glow-button bg-neon-gradient text-black font-semibold py-3 px-6 rounded-lg hover:opacity-90 transition">Quero fazer meu evento</a>
+        <a href="#servicos" class="border-2 border-pink-500 text-pink-500 font-semibold py-3 px-6 rounded-lg hover:bg-pink-500 hover:text-black transition">Conheça nossos serviços</a>
+      </div>
+      <div class="mt-16 floating">
+        <i class="fas fa-chevron-down subtle-purple text-2xl"></i>
+      </div>
+    </div>
+  </section>
+
+  <!-- Serviços -->
+  <section id="servicos" class="py-20 bg-black">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="text-center mb-16" data-aos="fade-up">
+        <h2 class="text-3xl md:text-4xl font-bold mb-4 gradient-text">O que oferecemos</h2>
+        <p class="text-gray-400 max-w-2xl mx-auto">Equipamentos de última geração e profissionais experientes para garantir o sucesso do seu evento.</p>
+      </div>
+      <div class="grid md:grid-cols-3 gap-8">
+        <div class="service-card p-8 rounded-xl text-center" data-aos="fade-up" data-aos-delay="100">
+          <div class="bg-pink-500 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4 subtle-neon-border">
+            <i class="fas fa-music text-black text-2xl"></i>
+          </div>
+          <h3 class="text-xl font-semibold mb-3 subtle-pink">Sonorização Profissional</h3>
+          <p class="text-gray-400">Sistema de áudio de alta qualidade com potência adequada para qualquer tamanho de evento.</p>
+        </div>
+        <div class="service-card p-8 rounded-xl text-center" data-aos="fade-up" data-aos-delay="200">
+          <div class="bg-purple-500 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4 subtle-neon-border">
+            <i class="fas fa-lightbulb text-black text-2xl"></i>
+          </div>
+          <h3 class="text-xl font-semibold mb-3 subtle-purple">Iluminação Cênica</h3>
+          <p class="text-gray-400">Efeitos de iluminação que transformam o ambiente e criam atmosferas incríveis.</p>
+        </div>
+        <div class="service-card p-8 rounded-xl text-center" data-aos="fade-up" data-aos-delay="300">
+          <div class="bg-pink-500 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4 subtle-neon-border">
+            <i class="fas fa-smog text-black text-2xl"></i>
+          </div>
+          <h3 class="text-xl font-semibold mb-3 subtle-pink">Máquina de Fumaça</h3>
+          <p class="text-gray-400">Efeitos especiais para destacar momentos importantes e criar climas únicos.</p>
+        </div>
+        <div class="service-card p-8 rounded-xl text-center" data-aos="fade-up" data-aos-delay="400">
+          <div class="bg-purple-500 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4 subtle-neon-border">
+            <i class="fas fa-tv text-black text-2xl"></i>
+          </div>
+          <h3 class="text-xl font-semibold mb-3 subtle-purple">Telão de LED</h3>
+          <p class="text-gray-400">Telas de alta resolução para exibição de conteúdo e interação com o público.</p>
+        </div>
+        <div class="service-card p-8 rounded-xl text-center" data-aos="fade-up" data-aos-delay="500">
+          <div class="bg-pink-500 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4 subtle-neon-border">
+            <i class="fas fa-users text-black text-2xl"></i>
+          </div>
+          <h3 class="text-xl font-semibold mb-3 subtle-pink">Equipe Técnica</h3>
+          <p class="text-gray-400">Profissionais qualificados para operação de equipamentos e suporte durante todo o evento.</p>
+        </div>
+        <div class="service-card p-8 rounded-xl text-center" data-aos="fade-up" data-aos-delay="600">
+          <div class="bg-purple-500 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4 subtle-neon-border">
+            <i class="fas fa-bolt text-black text-2xl"></i>
+          </div>
+          <h3 class="text-xl font-semibold mb-3 subtle-purple">Montagem Rápida</h3>
+          <p class="text-gray-400">Equipe especializada para instalação e desmontagem ágil e segura de todos os equipamentos.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Tipos de Eventos -->
+  <section id="eventos" class="py-20 bg-gray-900">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="text-center mb-16" data-aos="fade-up">
+        <h2 class="text-3xl md:text-4xl font-bold mb-4 gradient-text">Tipos de Eventos</h2>
+        <p class="text-gray-400 max-w-2xl mx-auto">Especialistas em transformar celebrações em momentos inesquecíveis.</p>
+      </div>
+      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div class="event-card bg-black rounded-xl overflow-hidden shadow-xl h-80" data-aos="zoom-in" data-aos-delay="100">
+          <div class="h-1/2 bg-cover bg-center" style="background-image: url('images/8SuCVPuajavd.jpg');"></div>
+          <div class="event-content p-6 h-1/2 flex flex-col justify-center">
+            <h3 class="text-xl font-bold mb-2 gradient-text">Aniversários</h3>
+            <p class="text-gray-400">Celebre mais um ano de vida com uma festa inesquecível, personalizada do seu jeito.</p>
+          </div>
+        </div>
+        <div class="event-card bg-black rounded-xl overflow-hidden shadow-xl h-80" data-aos="zoom-in" data-aos-delay="200">
+          <div class="h-1/2 bg-cover bg-center" style="background-image: url('images/AbrM6uzwLuzz.jpg');"></div>
+          <div class="event-content p-6 h-1/2 flex flex-col justify-center">
+            <h3 class="text-xl font-bold mb-2 gradient-text">Casamentos</h3>
+            <p class="text-gray-400">O dia mais especial da sua vida merece uma celebração única e emocionante.</p>
+          </div>
+        </div>
+        <div class="event-card bg-black rounded-xl overflow-hidden shadow-xl h-80" data-aos="zoom-in" data-aos-delay="300">
+          <div class="h-1/2 bg-cover bg-center" style="background-image: url('images/BCCDqjr5ANv7.jpg');"></div>
+          <div class="event-content p-6 h-1/2 flex flex-col justify-center">
+            <h3 class="text-xl font-bold mb-2 gradient-text">Eventos Sociais</h3>
+            <p class="text-gray-400">Formaturas, confraternizações e eventos especiais com estrutura completa.</p>
+          </div>
+        </div>
+        <div class="event-card bg-black rounded-xl overflow-hidden shadow-xl h-80" data-aos="zoom-in" data-aos-delay="400">
+          <div class="h-1/2 bg-cover bg-center" style="background-image: url('images/cKHQH7GwkIfx.jpg');"></div>
+          <div class="event-content p-6 h-1/2 flex flex-col justify-center">
+            <h3 class="text-xl font-bold mb-2 gradient-text">Eventos Corporativos</h3>
+            <p class="text-gray-400">Lançamentos, convenções e eventos empresariais com profissionalismo e tecnologia.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Galeria -->
+  <section id="galeria" class="py-20 bg-black">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="text-center mb-16" data-aos="fade-up">
+        <h2 class="text-3xl md:text-4xl font-bold mb-4 gradient-text">Galeria de Eventos</h2>
+        <p class="text-gray-400 max-w-2xl mx-auto">Confira alguns momentos incríveis que já produzimos.</p>
+      </div>
+      <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2">
+        <div class="gallery-item col-span-2 row-span-2 rounded-lg overflow-hidden" data-aos="fade-up">
+          <img src="images/d2Fu3dkKfry1.jpg" class="w-full h-full object-cover" />
+        </div>
+        <div class="gallery-item rounded-lg overflow-hidden" data-aos="fade-up" data-aos-delay="100">
+          <img src="images/ELxQRlo1PF22.jpg" class="w-full h-full object-cover" />
+        </div>
+        <div class="gallery-item rounded-lg overflow-hidden" data-aos="fade-up" data-aos-delay="200">
+          <img src="images/HgRUyt7M6YMX.jpg" class="w-full h-full object-cover" />
+        </div>
+        <div class="gallery-item rounded-lg overflow-hidden" data-aos="fade-up" data-aos-delay="300">
+          <img src="images/jQm56UWrCVfm.jpg" class="w-full h-full object-cover" />
+        </div>
+        <div class="gallery-item col-span-2 rounded-lg overflow-hidden" data-aos="fade-up" data-aos-delay="400">
+          <img src="images/lEWYMXE9DEaT.png" class="w-full h-full object-cover" />
+        </div>
+        <div class="gallery-item rounded-lg overflow-hidden" data-aos="fade-up" data-aos-delay="500">
+          <img src="images/R6Nkbx7Eek34.jpg" class="w-full h-full object-cover" />
+        </div>
+        <div class="gallery-item rounded-lg overflow-hidden" data-aos="fade-up" data-aos-delay="600">
+          <img src="images/rOAiqb5fBiU7.jpg" class="w-full h-full object-cover" />
+        </div>
+        <div class="gallery-item col-span-2 rounded-lg overflow-hidden" data-aos="fade-up" data-aos-delay="700">
+          <img src="images/tcpem9IWPpFP.jpg" class="w-full h-full object-cover" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Depoimentos -->
+  <section class="py-20 bg-gray-900">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="text-center mb-16" data-aos="fade-up">
+        <h2 class="text-3xl md:text-4xl font-bold mb-4 gradient-text">O que dizem nossos clientes</h2>
+        <p class="text-gray-400 max-w-2xl mx-auto">A satisfação de nossos clientes é nossa maior motivação.</p>
+      </div>
+      <div class="grid md:grid-cols-3 gap-8">
+        <div class="bg-gray-800 p-6 rounded-xl" data-aos="fade-up" data-aos-delay="100">
+          <div class="flex items-center mb-4">
+            <img src="images/TiRldwtROY73.jpg" class="w-12 h-12 rounded-full mr-4" />
+            <div>
+              <h4 class="font-bold">Carlos Silva</h4>
+              <p class="text-sm text-gray-400">Aniversário de 40 anos</p>
+            </div>
+          </div>
+          <div class="flex mb-4">
+            <i class="fas fa-star subtle-pink"></i>
+            <i class="fas fa-star subtle-pink"></i>
+            <i class="fas fa-star subtle-pink"></i>
+            <i class="fas fa-star subtle-pink"></i>
+            <i class="fas fa-star subtle-pink"></i>
+          </div>
+          <p class="text-gray-300">"O evento superou todas as expectativas! A qualidade do som e os efeitos de iluminação transformaram minha festa em algo inesquecível."</p>
+        </div>
+        <div class="bg-gray-800 p-6 rounded-xl" data-aos="fade-up" data-aos-delay="200">
+          <div class="flex items-center mb-4">
+            <img src="images/tV4cirk0QOob.jpg" class="w-12 h-12 rounded-full mr-4" />
+            <div>
+              <h4 class="font-bold">Ana Paula</h4>
+              <p class="text-sm text-gray-400">Casamento</p>
+            </div>
+          </div>
+          <div class="flex mb-4">
+            <i class="fas fa-star subtle-pink"></i>
+            <i class="fas fa-star subtle-pink"></i>
+            <i class="fas fa-star subtle-pink"></i>
+            <i class="fas fa-star subtle-pink"></i>
+            <i class="fas fa-star subtle-pink"></i>
+          </div>
+          <p class="text-gray-300">"Nosso casamento foi perfeito! A equipe do Impacto Eventos cuidou de cada detalhe com muita dedicação e profissionalismo."</p>
+        </div>
+        <div class="bg-gray-800 p-6 rounded-xl" data-aos="fade-up" data-aos-delay="300">
+          <div class="flex items-center mb-4">
+            <img src="images/U1UuZEY8cIGY.jpg" class="w-12 h-12 rounded-full mr-4" />
+            <div>
+              <h4 class="font-bold">Ricardo Santos</h4>
+              <p class="text-sm text-gray-400">Diretor de Marketing</p>
+            </div>
+          </div>
+          <div class="flex mb-4">
+            <i class="fas fa-star subtle-pink"></i>
+            <i class="fas fa-star subtle-pink"></i>
+            <i class="fas fa-star subtle-pink"></i>
+            <i class="fas fa-star subtle-pink"></i>
+            <i class="fas fa-star subtle-pink"></i>
+          </div>
+          <p class="text-gray-300">"Nosso evento corporativo foi um sucesso graças à estrutura e profissionalismo do Impacto Eventos. Superou todas as expectativas!"</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Quem somos -->
+  <section class="py-20 bg-black">
+    <div class="max-w-4xl mx-auto px-6">
+      <div class="flex flex-col md:flex-row items-center">
+        <div class="md:w-1/2 mb-10 md:mb-0 md:pr-10" data-aos="fade-right">
+          <h2 class="text-3xl md:text-4xl font-bold mb-6 gradient-text">Quem Somos</h2>
+          <p class="text-lg text-gray-300 mb-4">
+            Começamos com paixão e equipamentos próprios. Nosso foco é criar eventos memoráveis, com luz, som e presença. A primeira festa foi com um motoclube — e foi só o começo.
+          </p>
+          <p class="text-lg text-gray-300 mb-4">
+            Hoje, contamos com uma equipe experiente e equipamentos de última geração para atender eventos de todos os portes. Cada projeto é único e recebemos o mesmo cuidado e dedicação.
+          </p>
+          <p class="text-lg text-gray-300">
+            Nossa missão é transformar momentos em experiências inesquecíveis, superando as expectativas de nossos clientes em cada detalhe.
+          </p>
+        </div>
+        <div class="md:w-1/2" data-aos="fade-left">
+          <div class="relative">
+            <img src="images/X4UecEURuTR1.png" class="rounded-xl shadow-xl" />
+            <div class="absolute -bottom-6 -right-6 bg-neon-gradient text-black font-bold py-3 px-6 rounded-lg subtle-neon-border">
+              +5 anos de experiência
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contato -->
+  <section id="contato" class="py-20 bg-gray-900">
+    <div class="max-w-4xl mx-auto px-6">
+      <div class="text-center mb-16" data-aos="fade-up">
+        <h2 class="text-3xl md:text-4xl font-bold mb-4 gradient-text">Fale com a gente</h2>
+        <p class="text-gray-400 max-w-2xl mx-auto">Solicite um orçamento sem compromisso e vamos juntos transformar seu evento em algo inesquecível.</p>
+      </div>
+      <div class="flex flex-col md:flex-row gap-12">
+        <div class="md:w-1/2" data-aos="fade-right">
+          <form class="space-y-6">
+            <div>
+              <label for="nome" class="block mb-2 font-medium">Nome</label>
+              <input type="text" id="nome" placeholder="Seu nome completo" class="w-full p-4 rounded-lg form-input text-white focus:outline-none" />
+            </div>
+            <div>
+              <label for="email" class="block mb-2 font-medium">Email</label>
+              <input type="email" id="email" placeholder="seu@email.com" class="w-full p-4 rounded-lg form-input text-white focus:outline-none" />
+            </div>
+            <div>
+              <label for="telefone" class="block mb-2 font-medium">Telefone</label>
+              <input type="tel" id="telefone" placeholder="(00) 00000-0000" class="w-full p-4 rounded-lg form-input text-white focus:outline-none" />
+            </div>
+            <div>
+              <label for="evento" class="block mb-2 font-medium">Tipo de evento e data</label>
+              <input type="text" id="evento" placeholder="Ex: Casamento, 15/07/2023" class="w-full p-4 rounded-lg form-input text-white focus:outline-none" />
+            </div>
+            <div>
+              <label for="mensagem" class="block mb-2 font-medium">Mensagem</label>
+              <textarea id="mensagem" rows="4" placeholder="Conte-nos mais sobre seu evento..." class="w-full p-4 rounded-lg form-input text-white focus:outline-none"></textarea>
+            </div>
+            <button type="submit" class="w-full glow-button bg-neon-gradient text-black font-bold py-4 rounded-lg hover:opacity-90 transition">Solicitar orçamento</button>
+          </form>
+        </div>
+        <div class="md:w-1/2" data-aos="fade-left">
+          <div class="contact-card p-8 rounded-xl h-full">
+            <h3 class="text-2xl font-bold mb-6 gradient-text">Informações de Contato</h3>
+            <div class="space-y-6">
+              <div class="flex items-start">
+                <div class="bg-pink-500 w-12 h-12 rounded-full flex items-center justify-center mr-4 flex-shrink-0 subtle-neon-border">
+                  <i class="fas fa-map-marker-alt text-black"></i>
+                </div>
+                <div>
+                  <h4 class="font-semibold mb-1 subtle-pink">Endereço</h4>
+                  <p class="text-gray-400">Rua das Eventos, 123 - Centro<br>Cidade - Estado, 00000-000</p>
+                </div>
+              </div>
+              <div class="flex items-start">
+                <div class="bg-purple-500 w-12 h-12 rounded-full flex items-center justify-center mr-4 flex-shrink-0 subtle-neon-border">
+                  <i class="fas fa-phone-alt text-black"></i>
+                </div>
+                <div>
+                  <h4 class="font-semibold mb-1 subtle-purple">Telefone</h4>
+                  <p class="text-gray-400">(00) 00000-0000</p>
+                </div>
+              </div>
+              <div class="flex items-start">
+                <div class="bg-pink-500 w-12 h-12 rounded-full flex items-center justify-center mr-4 flex-shrink-0 subtle-neon-border">
+                  <i class="fas fa-envelope text-black"></i>
+                </div>
+                <div>
+                  <h4 class="font-semibold mb-1 subtle-pink">E-mail</h4>
+                  <p class="text-gray-400">contato@impactoeventos.com.br</p>
+                </div>
+              </div>
+              <div class="flex items-start">
+                <div class="bg-purple-500 w-12 h-12 rounded-full flex items-center justify-center mr-4 flex-shrink-0 subtle-neon-border">
+                  <i class="fab fa-whatsapp text-black"></i>
+                </div>
+                <div>
+                  <h4 class="font-semibold mb-1 subtle-purple">WhatsApp</h4>
+                  <a href="https://wa.me/5511999999999" target="_blank" class="text-pink-500 hover:text-pink-400 transition">(00) 00000-0000</a>
+                  <p class="text-gray-400 text-sm mt-1">Atendimento rápido e personalizado</p>
+                </div>
+              </div>
+            </div>
+            <div class="mt-8">
+              <h4 class="font-semibold mb-4 gradient-text">Siga-nos nas redes sociais</h4>
+              <div class="flex space-x-4">
+                <a href="#" class="tooltip bg-gray-800 w-12 h-12 rounded-full flex items-center justify-center hover:bg-pink-500 hover:text-black transition" title="Facebook">
+                  <i class="fab fa-facebook-f"></i>
+                </a>
+                <a href="#" class="tooltip bg-gray-800 w-12 h-12 rounded-full flex items-center justify-center hover:bg-pink-500 hover:text-black transition" title="Instagram">
+                  <i class="fab fa-instagram"></i>
+                </a>
+                <a href="#" class="tooltip bg-gray-800 w-12 h-12 rounded-full flex items-center justify-center hover:bg-purple-500 hover:text-black transition" title="YouTube">
+                  <i class="fab fa-youtube"></i>
+                </a>
+                <a href="#" class="tooltip bg-gray-800 w-12 h-12 rounded-full flex items-center justify-center hover:bg-purple-500 hover:text-black transition" title="TikTok">
+                  <i class="fab fa-tiktok"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Rodapé -->
+  <footer class="py-12 bg-gray-950">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="grid md:grid-cols-4 gap-8 mb-8">
+        <div>
+          <div class="flex items-center mb-4">
+            <i class="fas fa-bolt subtle-pink text-2xl mr-2"></i>
+            <span class="text-xl font-bold gradient-text">Impacto Eventos</span>
+          </div>
+          <p class="text-gray-500">Transformando momentos em experiências inesquecíveis desde 2018.</p>
+        </div>
+        <div>
+          <h4 class="text-lg font-semibold mb-4 subtle-pink">Links Rápidos</h4>
+          <ul class="space-y-2">
+            <li><a href="#home" class="text-gray-500 hover:text-pink-500 transition">Início</a></li>
+            <li><a href="#servicos" class="text-gray-500 hover:text-pink-500 transition">Serviços</a></li>
+            <li><a href="#eventos" class="text-gray-500 hover:text-pink-500 transition">Eventos</a></li>
+            <li><a href="#galeria" class="text-gray-500 hover:text-pink-500 transition">Galeria</a></li>
+            <li><a href="#contato" class="text-gray-500 hover:text-pink-500 transition">Contato</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="text-lg font-semibold mb-4 subtle-purple">Serviços</h4>
+          <ul class="space-y-2">
+            <li><a href="#" class="text-gray-500 hover:text-purple-500 transition">Sonorização</a></li>
+            <li><a href="#" class="text-gray-500 hover:text-purple-500 transition">Iluminação</a></li>
+            <li><a href="#" class="text-gray-500 hover:text-purple-500 transition">Telão de LED</a></li>
+            <li><a href="#" class="text-gray-500 hover:text-purple-500 transition">Efeitos Especiais</a></li>
+            <li><a href="#" class="text-gray-500 hover:text-purple-500 transition">Equipe Técnica</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="text-lg font-semibold mb-4 gradient-text">Newsletter</h4>
+          <p class="text-gray-500 mb-4">Receba informações sobre nossos eventos e promoções.</p>
+          <form class="flex">
+            <input type="email" placeholder="Seu email" class="px-4 py-2 rounded-l-lg bg-gray-900 text-white w-full focus:outline-none focus:ring-1 focus:ring-pink-500" />
+            <button type="submit" class="bg-neon-gradient text-black px-4 py-2 rounded-r-lg hover:opacity-90 transition">
+              <i class="fas fa-paper-plane"></i>
+            </button>
+          </form>
+        </div>
+      </div>
+      <div class="border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center">
+        <p class="text-gray-500 text-sm mb-4 md:mb-0">© 2023 Impacto Eventos. Todos os direitos reservados.</p>
+        <div class="flex space-x-6">
+          <a href="#" class="text-gray-500 hover:text-pink-500 transition text-sm">Política de Privacidade</a>
+          <a href="#" class="text-gray-500 hover:text-pink-500 transition text-sm">Termos de Uso</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+  <script>
+    // Inicializar AOS
+    AOS.init({
+      duration: 1000,
+      once: true,
+      easing: 'ease-out'
+    });
+
+    // Inicializar Particles.js
+    particlesJS('particles-js', {
+      particles: {
+        number: {
+          value: 60,
+          density: {
+            enable: true,
+            value_area: 800
+          }
+        },
+        color: {
+          value: '#ec4899'
+        },
+        shape: {
+          type: 'circle',
+          stroke: {
+            width: 0,
+            color: '#000000'
+          }
+        },
+        opacity: {
+          value: 0.4,
+          random: false,
+          anim: {
+            enable: false,
+            speed: 1,
+            opacity_min: 0.1,
+            sync: false
+          }
+        },
+        size: {
+          value: 3,
+          random: true,
+          anim: {
+            enable: false,
+            speed: 40,
+            size_min: 0.1,
+            sync: false
+          }
+        },
+        line_linked: {
+          enable: true,
+          distance: 150,
+          color: '#a855f7',
+          opacity: 0.2,
+          width: 1
+        },
+        move: {
+          enable: true,
+          speed: 2,
+          direction: 'none',
+          random: false,
+          straight: false,
+          out_mode: 'out',
+          bounce: false,
+          attract: {
+            enable: false,
+            rotateX: 600,
+            rotateY: 1200
+          }
+        }
+      },
+      interactivity: {
+        detect_on: 'canvas',
+        events: {
+          onhover: {
+            enable: true,
+            mode: 'grab'
+          },
+          onclick: {
+            enable: true,
+            mode: 'push'
+          },
+          resize: true
+        },
+        modes: {
+          grab: {
+            distance: 140,
+            line_linked: {
+              opacity: 0.5
+            }
+          },
+          push: {
+            particles_nb: 4
+          }
+        }
+      },
+      retina_detect: true
+    });
+
+    // Inicializar Typed.js
+    const typed = new Typed('#typed-text', {
+      strings: ['Eventos que marcam.', 'Experiências inesquecíveis.', 'Celebrações memoráveis.'],
+      typeSpeed: 50,
+      backSpeed: 30,
+      loop: true,
+      showCursor: true,
+      cursorChar: '|'
+    });
+
+    // Menu mobile
+    const mobileMenuButton = document.getElementById('mobile-menu-button');
+    const mobileMenu = document.getElementById('mobile-menu');
+    
+    mobileMenuButton.addEventListener('click', () => {
+      mobileMenu.classList.toggle('hidden');
+    });
+
+    // Fechar menu mobile ao clicar em um link
+    const mobileLinks = mobileMenu.querySelectorAll('a');
+    mobileLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        mobileMenu.classList.add('hidden');
+      });
+    });
+
+    // Scroll suave para links de âncora
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          window.scrollTo({
+            top: target.offsetTop - 80,
+            behavior: 'smooth'
+          });
+        }
+      });
+    });
+
+    // Adicionar classe ativa ao menu conforme o scroll
+    window.addEventListener('scroll', () => {
+      const sections = document.querySelectorAll('section');
+      const navLinks = document.querySelectorAll('.nav-link');
+      
+      let current = '';
+      
+      sections.forEach(section => {
+        const sectionTop = section.offsetTop;
+        const sectionHeight = section.clientHeight;
+        if (pageYOffset >= (sectionTop - 200)) {
+          current = section.getAttribute('id');
+        }
+      });
+      
+      navLinks.forEach(link => {
+        link.classList.remove('text-pink-500');
+        if (link.getAttribute('href').slice(1) === current) {
+          link.classList.add('text-pink-500');
+        }
+      });
+    });
+
+    // Tooltips simples
+    document.querySelectorAll('.tooltip').forEach(element => {
+      element.addEventListener('mouseenter', function() {
+        const title = this.getAttribute('title');
+        this.setAttribute('data-tooltip', title);
+        this.removeAttribute('title');
+        
+        const tooltip = document.createElement('div');
+        tooltip.className = 'absolute bg-black text-white text-xs rounded py-1 px-2 -top-8 left-1/2 transform -translate-x-1/2';
+        tooltip.textContent = title;
+        this.appendChild(tooltip);
+      });
+      
+      element.addEventListener('mouseleave', function() {
+        const tooltip = this.querySelector('div');
+        if (tooltip) {
+          tooltip.remove();
+        }
+        const title = this.getAttribute('data-tooltip');
+        this.setAttribute('title', title);
+      });
+    });
+  </script>
+</body>
+</html>
